@@ -8,14 +8,16 @@ import com.audrey.movieapp.common.exception.ResourceNotFoundException;
 public class MovieService {
 
     private final MovieRepository movieRepository;
+    private final MovieMapper movieMapper;
 
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
+        this.movieMapper = movieMapper;
     }
 
-    public Movie getMovieById(Long id) {
-    return movieRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
+    public MovieResponse getMovieById(Long id) {
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
+        return movieMapper.toResponse(movie);
+    }
 }
-}
-
