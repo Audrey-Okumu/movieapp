@@ -1,5 +1,7 @@
 package com.audrey.movieapp.movie;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.audrey.movieapp.common.exception.ResourceNotFoundException;
@@ -20,4 +22,10 @@ public class MovieService {
                 .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
         return movieMapper.toResponse(movie);
     }
+
+    public List<MovieResponse> getAllMovies() {
+    return movieRepository.findAll().stream()
+            .map(movieMapper::toResponse)
+            .toList();
+}
 }
