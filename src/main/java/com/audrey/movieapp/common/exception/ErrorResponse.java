@@ -1,9 +1,11 @@
 package com.audrey.movieapp.common.exception;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 public record ErrorResponse(
     int status,
     String message,
-    LocalDateTime timestamp
+    LocalDateTime timestamp,
+    Map<String, String> fieldErrors
 ) {}
