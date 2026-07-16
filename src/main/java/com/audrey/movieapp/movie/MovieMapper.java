@@ -15,4 +15,16 @@ public class MovieMapper {
             movie.getPosterUrl()
         );
     }
+
+
+    public Movie toEntity(MovieRequest request) {
+        Movie movie = new Movie();
+        
+        movie.setTitle(request.title());
+        movie.setDescription(request.description());
+        movie.setReleaseDate(request.releaseDate());
+        movie.setDurationMinutes(request.durationMinutes());
+        movie.setPosterUrl(request.posterUrl());
+        return movie;
+    }
 }
